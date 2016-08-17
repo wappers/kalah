@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
-<head>Kalah - Chris Morgan</title>
+<head><title>Kalah - Chris Morgan</title>
 </head>
 <style>
 .store {
