@@ -59,15 +59,15 @@ public class KalahGame {
 			 * If the last sown seed lands in an empty house owned by the
 			 * player, and the opposite house contains seeds,
 			 */
-			if (!(pit instanceof Store) && i == 1 && pit.isEmpty() && pit.getPlayer() == board.getCurrentPlayer()
-					&& !pit.getOppositeHouse().isEmpty()) {
+			if (pit instanceof House && i == 1 && pit.isEmpty() && pit.getPlayer() == board.getCurrentPlayer()
+					&& !((House) pit).getOppositeHouse().isEmpty()) {
 				/**
 				 * both the last seed and the opposite seeds are captured and
 				 * placed into the player's store.
 				 */
-				board.addMessage(
-						board.getCurrentPlayer() + " captures " + pit.getOppositeHouse().getStones() + " stones");
-				board.getCurrentPlayer().getStore().addStones(1 + pit.getOppositeHouse().takeStones());
+				board.addMessage(board.getCurrentPlayer() + " captures " + ((House) pit).getOppositeHouse().getStones()
+						+ " stones");
+				board.getCurrentPlayer().getStore().addStones(1 + ((House) pit).getOppositeHouse().takeStones());
 
 			} else {
 				pit.addStone();

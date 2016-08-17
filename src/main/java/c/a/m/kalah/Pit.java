@@ -1,7 +1,7 @@
 package c.a.m.kalah;
 
 public class Pit {
-	private Pit oppositeHouse;
+
 	private final Player player;
 	private int stones;
 
@@ -22,14 +22,6 @@ public class Pit {
 
 	public void setStones(int stones) {
 		this.stones = stones;
-	}
-
-	public Pit getOppositeHouse() {
-		return oppositeHouse;
-	}
-
-	public void setOppositeHouse(Pit opposite) {
-		this.oppositeHouse = opposite;
 	}
 
 	public Player getPlayer() {
