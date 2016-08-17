@@ -21,13 +21,13 @@ import java.util.List;
  *
  */
 public class KalahBoard {
-	public final int configStones;
 	public final int configHouses;
+	public final int configStones;
 	private Player currentPlayer;
+	private final List<String> messages = new ArrayList<String>();
+	private final List<Pit> pits = new ArrayList<Pit>();
 	private Player player1;
 	private Player player2;
-	private final List<Pit> pits = new ArrayList<Pit>();
-	private final List<String> messages = new ArrayList<String>();
 
 	public KalahBoard(int configStones, int configHouses) {
 		this.configStones = configStones;
@@ -35,20 +35,44 @@ public class KalahBoard {
 		initKalahBoard();
 	}
 
-	public List<String> getMessages() {
-		return messages;
+	public void addMessage(String message) {
+		messages.add(message);
 	}
 
-	public int getConfigStones() {
-		return configStones;
+	public void changePlayer() {
+		if (currentPlayer == player1) {
+			currentPlayer = player2;
+		} else {
+			currentPlayer = player1;
+		}
+	}
+
+	public void clearMessages() {
+		messages.clear();
 	}
 
 	public int getConfigHouses() {
 		return configHouses;
 	}
 
+	public int getConfigStones() {
+		return configStones;
+	}
+
 	public Player getCurrentPlayer() {
 		return currentPlayer;
+	}
+
+	public CircularCursor<Pit> getHouseCursor(int index) {
+		return new CircularCursor<Pit>(pits, index);
+	}
+
+	public List<String> getMessages() {
+		return messages;
+	}
+
+	public List<Pit> getPits() {
+		return pits;
 	}
 
 	public Player getPlayer1() {
@@ -59,16 +83,11 @@ public class KalahBoard {
 		return player2;
 	}
 
-	public List<Pit> getPits() {
-		return pits;
-	}
-
 	private void initKalahBoard() {
 		// Configure Blank Board
 		player1 = new Player("Player 1");
 		for (int i = 0; i < configHouses; i++) {
-			House newHouse = new House(player1, configStones);
-			player1.getHouses().add(newHouse);
+			player1.getHouses().add(new House(player1, configStones));
 		}
 		player1.setStore(new Store(player1, 0));
 		pits.addAll(player1.getHouses());
@@ -85,34 +104,9 @@ public class KalahBoard {
 		player2.setStore(new Store(player2, 0));
 		pits.addAll(player2.getHouses());
 		pits.add(player2.getStore());
-		// Configure Opposite pits
 
 		messages.add("New Board");
 		changePlayer();
-	}
-
-	public boolean checkForwin() {
-		return false;
-	}
-
-	public void changePlayer() {
-		if (currentPlayer == player1) {
-			currentPlayer = player2;
-		} else {
-			currentPlayer = player1;
-		}
-	}
-
-	public void addMessage(String message) {
-		messages.add(message);
-	}
-
-	public void clearMessages() {
-		messages.clear();
-	}
-
-	public CircularCursor<Pit> getHouseCursor(int index) {
-		return new CircularCursor<Pit>(pits, index);
 	}
 
 }
