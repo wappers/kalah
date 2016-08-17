@@ -19,7 +19,7 @@ public class KalahController {
 	}
 
 	@ModelAttribute("board")
-	public KalahBoard getInitializeMyObject() {
+	public KalahBoard initializeBoard() {
 		return new KalahBoard(6, 6);
 	}
 
