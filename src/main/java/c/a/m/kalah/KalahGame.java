@@ -31,6 +31,21 @@ package c.a.m.kalah;
  *
  */
 public class KalahGame {
+
+	private Player checkForWinner(KalahBoard board) {
+		if (board.getPlayer1().getStore().getStones() > board.getPlayer2().getStore().getStones()) {
+			board.addMessage("Player 1 wins!");
+			return board.getPlayer1();
+		} else if (board.getPlayer1().getStore().getStones() < board.getPlayer2().getStore().getStones()) {
+			board.addMessage("Player 2 wins!");
+			return board.getPlayer2();
+		} else {
+			// Draw
+			board.addMessage("Its a draw!");
+			return null;
+		}
+	}
+
 	public void go(KalahBoard board, int houseNumber) {
 		CircularCursor<Pit> cursor = board.getHouseCursor(houseNumber - 1);
 
@@ -109,20 +124,6 @@ public class KalahGame {
 			board.addMessage(board.getCurrentPlayer() + " gets an additional move");
 		} else {
 			board.changePlayer();
-		}
-	}
-
-	private Player checkForWinner(KalahBoard board) {
-		if (board.getPlayer1().getStore().getStones() > board.getPlayer2().getStore().getStones()) {
-			board.addMessage("Player 1 wins!");
-			return board.getPlayer1();
-		} else if (board.getPlayer1().getStore().getStones() < board.getPlayer2().getStore().getStones()) {
-			board.addMessage("Player 2 wins!");
-			return board.getPlayer2();
-		} else {
-			// Draw
-			board.addMessage("Its a draw!");
-			return null;
 		}
 	}
 
